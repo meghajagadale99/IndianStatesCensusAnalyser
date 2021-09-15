@@ -1,4 +1,5 @@
 package com.bridgelabz;
+
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
@@ -19,7 +20,7 @@ public class IndianStatesCensusAnalyser {
         String line = br.readLine();
         String[] header = line.split(",");
         for (int i = 0; i < header.length && i < stringName.length; i++) {
-            if (!stringName[i].equals(header[i])){
+            if (!stringName[i].equals(header[i])) {
                 throw new CensusAnalyserException("Incorrect header!", CensusAnalyserException.ExceptionType.INCORRECT_HEADER);
             }
         }
@@ -31,7 +32,7 @@ public class IndianStatesCensusAnalyser {
             Scanner input = new Scanner(Paths.get(filePath));
             input.useDelimiter(",");
             Pattern result = input.delimiter();
-            if (result.pattern().equals(delimitingCharacter)){
+            if (result.pattern().equals(delimitingCharacter)) {
                 return true;
             } else {
                 throw new Exception("Incorrect Delimiter");
@@ -45,7 +46,7 @@ public class IndianStatesCensusAnalyser {
         int count = 0;
         try {
             int index = filePath.lastIndexOf('.');
-            if(!filePath.startsWith(".csv", index)){
+            if (!filePath.startsWith(".csv", index)) {
                 throw new CensusAnalyserException("Incorrect type", CensusAnalyserException.ExceptionType.FILE_TYPE_INCORRECT);
             }
             FileReader filereader = new FileReader(filePath);
@@ -59,8 +60,8 @@ public class IndianStatesCensusAnalyser {
                 } catch (CsvException e) {
                     e.printStackTrace();
                 }
-                String[] header={"State","Population","AreaInSqKm","DensityPerSqKm"};
-                if(checkHeader(filePath,header)){
+                String[] header = {"State", "Population", "AreaInSqKm", "DensityPerSqKm"};
+                if (checkHeader(filePath, header)) {
                     for (String[] row : allData) {
                         count++;
                         for (String cell : row) {
@@ -82,4 +83,3 @@ public class IndianStatesCensusAnalyser {
         System.out.println("Welcome to Indian State Census Analyser!");
     }
 }
-
